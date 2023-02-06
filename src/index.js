@@ -4,8 +4,6 @@ import { Stage, Layer, Rect, Text } from "react-konva";
 let history = [{ x1: 50, y1: 50, x2: 100, y2: 100 }];
 let historyIndex = 0;
 function App() {
-  let [presentBlackRect, setPresentBlackRect] = useState(history[0]);
-  let [presentRedRect, setPresentRedRect] = useState(history[1]);
   let [presentRect, setPresentRect] = useState(history[0]);
 
   const handleUndo = () => {
@@ -15,7 +13,6 @@ function App() {
     historyIndex -= 1;
     const previous = history[historyIndex];
     setPresentRect(previous);
-    // setPresentBlackRect(previous);
   };
 
   const handleRedo = () => {
@@ -39,8 +36,7 @@ function App() {
     history = history.concat([position]);
     historyIndex += 1;
     setPresentRect(position);
-    // setPresentBlackRect(position);
-    // setPresentRedRect(position);
+
     console.log("add black pos  :" + history.length);
   };
 
