@@ -7,7 +7,7 @@ let history = [
 ];
 let historyIndex = 0;
 function App() {
-  let [presentRect, setPresentRect] = useState(history[0]);
+  let [presentBlackRect, setPresentBlackRect] = useState(history[0]);
   let [presentRedRect, setPresentRedRect] = useState(history[1]);
 
   const handleUndo = () => {
@@ -16,7 +16,7 @@ function App() {
     }
     historyIndex -= 1;
     const previous = history[historyIndex];
-    setPresentRect(previous);
+    setPresentBlackRect(previous);
   };
 
   const handleRedo = () => {
@@ -25,7 +25,7 @@ function App() {
     }
     historyIndex += 1;
     const next = history[historyIndex];
-    setPresentRect(next);
+    setPresentBlackRect(next);
   };
 
   const handleDragEndRect = (e) => {
@@ -36,7 +36,8 @@ function App() {
     };
     history = history.concat([position]);
     historyIndex += 1;
-    setPresentRect(position);
+    setPresentBlackRect(position);
+    // setPresentRedRect(position);
     console.log("add black pos  :" + history.length);
   };
 
@@ -47,8 +48,8 @@ function App() {
         <Text text="redo" x={40} onClick={handleRedo} />
         <Text text={historyIndex} x={80} />
         <Rect
-          x={presentRect.x}
-          y={presentRect.y}
+          x={presentBlackRect.x}
+          y={presentBlackRect.y}
           width={50}
           height={50}
           fill="black"
