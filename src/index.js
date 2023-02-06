@@ -8,6 +8,7 @@ let history = [
 let historyIndex = 0;
 function App() {
   let [presentRect, setPresentRect] = useState(history[0]);
+  let [presentRedRect, setPresentRedRect] = useState(history[1]);
 
   const handleUndo = () => {
     if (historyIndex === 0) {
@@ -55,8 +56,8 @@ function App() {
           onDragEnd={handleDragEndRect}
         />
         <Rect
-          x={presentRect.x + 50}
-          y={presentRect.y}
+          x={presentRedRect.x}
+          y={presentRedRect.y}
           width={50}
           height={50}
           fill="red"
