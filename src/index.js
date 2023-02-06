@@ -14,7 +14,8 @@ function App() {
     }
     historyIndex -= 1;
     const previous = history[historyIndex];
-    setPresentBlackRect(previous);
+    setPresentRect(previous);
+    // setPresentBlackRect(previous);
   };
 
   const handleRedo = () => {
@@ -23,7 +24,7 @@ function App() {
     }
     historyIndex += 1;
     const next = history[historyIndex];
-    setPresentBlackRect(next);
+    // setPresentBlackRect(next);
   };
 
   const handleDragEndRect = (e) => {
