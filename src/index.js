@@ -7,8 +7,7 @@ let history = [
 ];
 let historyIndex = 0;
 function App() {
-  let [presentBlackRect, setPresentBlackRect] = useState(history[0]);
-  let [presentRedRect, setPresentRedRect] = useState(history[1]);
+  let [presentRect, setPresentRect] = useState(history[0]);
 
   const handleUndo = () => {
     if (historyIndex === 0) {
@@ -16,11 +15,7 @@ function App() {
     }
     historyIndex -= 1;
     const previous = history[historyIndex];
-    if (presentRedRect) {
-      setPresentRedRect(previous);
-    } else if (presentBlackRect) {
-      setPresentBlackRect(previous);
-    }
+    setPresentRect(previous);
   };
 
   const handleRedo = () => {
@@ -29,10 +24,10 @@ function App() {
     }
     historyIndex += 1;
     const next = history[historyIndex];
-    setPresent(next);
+    setPresentRect(next);
   };
 
-  const handleDragEndBlackRect = (e) => {
+  const handleDragEndRect = (e) => {
     history = history.slice(0, historyIndex + 1);
     const position = {
       x: e.target.x(),
@@ -40,19 +35,8 @@ function App() {
     };
     history = history.concat([position]);
     historyIndex += 1;
-    setPresentBlackRect(position);
+    setPresentRect(position);
     console.log("add black pos  :" + history.length);
-  };
-  const handleDragEndRedRect = (e) => {
-    history = history.slice(0, historyIndex + 1);
-    const position = {
-      x: e.target.x(),
-      y: e.target.y(),
-    };
-    history = history.concat([position]);
-    historyIndex += 1;
-    setPresentRedRect(position);
-    console.log("add red pos :" + history.length);
   };
 
   return (
@@ -62,22 +46,22 @@ function App() {
         <Text text="redo" x={40} onClick={handleRedo} />
         <Text text={historyIndex} x={80} />
         <Rect
-          x={presentBlackRect.x}
-          y={presentBlackRect.y}
+          x={presentRect.x}
+          y={presentRect.y}
           width={50}
           height={50}
           fill="black"
           draggable
-          onDragEnd={handleDragEndBlackRect}
+          onDragEnd={handleDragEndRect}
         />
         <Rect
-          x={presentRedRect.x}
-          y={presentRedRect.y}
+          x={presentRect.x + 50}
+          y={presentRect.y}
           width={50}
           height={50}
           fill="red"
           draggable
-          onDragEnd={handleDragEndRedRect}
+          onDragEnd={handleDragEndRect}
         />
       </Layer>
     </Stage>
